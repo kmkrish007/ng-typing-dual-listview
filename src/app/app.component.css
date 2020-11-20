@@ -1,0 +1,56 @@
+p {
+  font-family: Lato;
+}
+
+#container {
+  visibility: hidden;
+}
+
+#loader {
+  color: #008cff;
+  height: 40px;
+  width: 30%;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+#list-1,
+#list-2 {
+  width: 40%;
+  height: 430px;
+  box-shadow: 0 1px 4px #ddd;
+  border-bottom: 1px solid #ddd;
+}
+#firstList,
+#secondList {
+  margin-top: 13px;
+}
+
+.e-btn {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+#btn {
+  float: left;
+  width: 5%;
+  padding-left: 30px;
+  margin-top: 67px;
+}
+
+#list-1 {
+  float: left;
+}
+
+#firstInput {
+  width: 40%;
+}
+#secondInput {
+  width: 50%;
+}
+#text2 {
+  margin-top: -23px;
+  margin-left: 200px;
+}
