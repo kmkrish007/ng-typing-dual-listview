@@ -43,6 +43,9 @@ p {
 #list-1 {
   float: left;
 }
+#list-2 {
+  float: right;
+}
 
 #firstInput {
   width: 40%;

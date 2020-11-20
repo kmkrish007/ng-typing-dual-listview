@@ -42,81 +42,88 @@ export class AppComponent {
   @ViewChild("textbox") textboxEle: any;
   @ViewChild("text") textEle: any;
   ngAfterViewInit() {
-    this.firstListData = this.firstListObj.dataSource.slice();
-    this.secondListData = this.secondListObj.dataSource.slice();
+    this.firstListData = (this.firstListObj as any).dataSource.slice();
+    this.secondListData = (this.secondListObj as any).dataSource.slice();
   }
   //Here, all list items are moved to the second list on clicking move all button
   firstbtnclick() {
-    this.secondListObj.dataSource = Array.prototype.concat.call(
-      this.firstListObj.dataSource,
-      this.secondListObj.dataSource
+    (this.secondListObj as any).dataSource = Array.prototype.concat.call(
+      (this.firstListObj as any).dataSource,
+      (this.secondListObj as any).dataSource
     );
     this.updateFirstListData();
-    this.firstListObj.removeMultipleItems(this.firstListObj.liCollection);
-    this.firstListData = this.firstListData.concat(
-      this.firstListObj.dataSource
+    (this.firstListObj as any).removeMultipleItems(
+      (this.firstListObj as any).liCollection
     );
-    this.secondListData = this.secondListObj.dataSource.slice();
-    this.firstBtnObj.disabled = true;
+    this.firstListData = this.firstListData.concat(
+      (this.firstListObj as any).dataSource
+    );
+    this.secondListData = (this.secondListObj as any).dataSource.slice();
+    (this.firstBtnObj as any).disabled = true;
     this.onFirstKeyUp();
     this.setButtonState();
   }
 
   //Here, the selected list items are moved to the second list on clicking move button
   secondbtnclick() {
-    let e = this.firstListObj.getSelectedItems();
-    this.secondListObj.dataSource = Array.prototype.concat.call(
-      this.secondListObj.dataSource,
+    let e = (this.firstListObj as any).getSelectedItems();
+    (this.secondListObj as any).dataSource = Array.prototype.concat.call(
+      (this.secondListObj as any).dataSource,
       e.data
     );
-    this.firstListObj.removeItem(e.item);
-    this.firstListData = this.firstListObj.dataSource;
-    this.secondListData = this.secondListObj.dataSource.slice();
+    (this.firstListObj as any).removeItem(e.item);
+    this.firstListData = (this.firstListObj as any).dataSource;
+    this.secondListData = (this.secondListObj as any).dataSource.slice();
     this.onFirstKeyUp();
-    this.secondBtnObj.disabled = true;
+    (this.secondListObj as any).disabled = true;
     this.setButtonState();
   }
 
   //Here, the selected list items are moved to the first list on clicking move button
   thirdbtnclick() {
-    let e = this.secondListObj.getSelectedItems();
-    this.firstListObj.dataSource = Array.prototype.concat.call(
-      this.firstListObj.dataSource,
+    let e = (this.secondListObj as any).getSelectedItems();
+    (this.firstListObj as any).dataSource = Array.prototype.concat.call(
+      (this.firstListObj as any).dataSource,
       e.data
     );
-    this.secondListObj.removeItem(e.item);
-    this.secondListData = this.secondListObj.dataSource;
-    this.firstListData = this.firstListObj.dataSource.slice();
+    (this.secondListObj as any).removeItem(e.item);
+    this.secondListData = (this.secondListObj as any).dataSource;
+    this.firstListData = (this.firstListObj as any).dataSource.slice();
     this.onSecondKeyUp();
-    this.thirdBtnObj.disabled = true;
+    (this.thirdBtnObj as any).disabled = true;
     this.setButtonState();
   }
 
   //Here, all list items are moved to the first list on clicking move all button
   fourthbtnclick() {
-    this.firstListObj.dataSource = Array.prototype.concat.call(
-      this.firstListObj.dataSource,
-      this.secondListObj.dataSource
+    (this.firstListObj as any).dataSource = Array.prototype.concat.call(
+      (this.firstListObj as any).dataSource,
+      (this.secondListObj as any).dataSource
     );
     this.updateSecondListData();
-    this.secondListObj.removeMultipleItems(this.secondListObj.liCollection);
-    this.secondListData = this.secondListData.concat(
-      this.secondListObj.dataSource
+    (this.secondListObj as any).removeMultipleItems(
+      (this.secondListObj as any).liCollection
     );
-    this.firstListData = this.firstListObj.dataSource.slice();
+    this.secondListData = this.secondListData.concat(
+      (this.secondListObj as any).dataSource
+    );
+    this.firstListData = (this.firstListObj as any).dataSource.slice();
     this.onSecondKeyUp();
     this.setButtonState();
   }
 
   //Here, the ListView data source is updated to the first list
   updateFirstListData() {
-    Array.prototype.forEach.call(this.firstListObj.liCollection, list => {
-      this.firstListData.forEach((data, index) => {
-        if (list.innerText.trim() === data.text) {
-          delete this.firstListData[index];
-        }
-      });
-    });
+    Array.prototype.forEach.call(
+      (this.firstListObj as any).liCollection,
+      list => {
+        this.firstListData.forEach((data, index) => {
+          if (list.innerText.trim() === data.text) {
+            delete this.firstListData[index];
+          }
+        });
+      }
+    );
     this.textboxEle.nativeElement.value = "";
     let ds = [];
     this.firstListData.forEach(data => {
@@ -127,13 +134,16 @@ export class AppComponent {
 
   //Here, the ListView dataSource is updated for the second list
   updateSecondListData() {
-    Array.prototype.forEach.call(this.secondListObj.liCollection, list => {
-      this.secondListData.forEach((data, index) => {
-        if (list.innerText.trim() === data.text) {
-          delete this.secondListData[index];
-        }
-      });
-    });
+    Array.prototype.forEach.call(
+      (this.secondListObj as any).liCollection,
+      list => {
+        this.secondListData.forEach((data, index) => {
+          if (list.innerText.trim() === data.text) {
+            delete this.secondListData[index];
+          }
+        });
+      }
+    );
     this.textEle.nativeElement.value = "";
     let ds = [];
     this.secondListData.forEach(data => {
@@ -142,10 +152,10 @@ export class AppComponent {
     this.secondListData = ds;
   }
   onFirstListSelect() {
-    this.secondBtnObj.disabled = false;
+    (this.secondBtnObj as any).disabled = false;
   }
   onSecondListSelect() {
-    this.thirdBtnObj.disabled = false;
+    (this.thirdBtnObj as any).disabled = false;
   }
 
   //Here, filtering is handled using the dataManager for the first list
@@ -155,9 +165,9 @@ export class AppComponent {
       new Query().where("text", "startswith", value, true)
     );
     if (!value) {
-      this.firstListObj.dataSource = this.firstListData.slice();
+      (this.firstListObj as any).dataSource = this.firstListData.slice();
     } else {
-      this.firstListObj.dataSource = data;
+      (this.firstListObj as any).dataSource = data;
     }
   }
   //Here, filtering is handled using the dataManager for the second list
@@ -167,26 +177,26 @@ export class AppComponent {
       new Query().where("text", "startswith", value, true)
     );
     if (!value) {
-      this.secondListObj.dataSource = this.secondListData.slice();
+      (this.secondListObj as any).dataSource = this.secondListData.slice();
     } else {
-      this.secondListObj.dataSource = data;
+      (this.secondListObj as any).dataSource = data;
     }
   }
 
   //Here, the state of the button is changed
   setButtonState() {
-    if (this.firstListObj.dataSource.length) {
-      this.firstBtnObj.disabled = false;
+    if ((this.firstListObj as any).dataSource.length) {
+      (this.firstBtnObj as any).disabled = false;
     } else {
-      this.firstBtnObj.disabled = true;
-      this.secondBtnObj.disabled = true;
+      (this.firstBtnObj as any).disabled = true;
+      (this.secondBtnObj as any).disabled = true;
     }
 
-    if (this.secondListObj.dataSource.length) {
-      this.fourthBtnObj.disabled = false;
+    if ((this.secondListObj as any).dataSource.length) {
+      (this.fourthBtnObj as any).disabled = false;
     } else {
-      this.fourthBtnObj.disabled = true;
-      this.thirdBtnObj.disabled = true;
+      (this.fourthBtnObj as any).disabled = true;
+      (this.thirdBtnObj as any).disabled = true;
     }
   }
 }
